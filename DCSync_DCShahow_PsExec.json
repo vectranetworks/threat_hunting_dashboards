@@ -1,0 +1,298 @@
+[
+  {
+    "_id": "78464e50-d138-11ec-a54e-5feef079c06e",
+    "_type": "dashboard",
+    "_source": {
+      "title": "Threat Hunting Webinar - PsExec",
+      "hits": 0,
+      "description": "This dashboard can help uncover the usage of PsExec in the network from admins, red teams, and threat actors.",
+      "panelsJSON": "[{\"gridData\":{\"x\":0,\"y\":12,\"w\":45,\"h\":13,\"i\":\"1\"},\"version\":\"6.8.13\",\"panelIndex\":\"1\",\"type\":\"visualization\",\"id\":\"40a72350-d135-11ec-a54e-5feef079c06e\",\"embeddableConfig\":{}},{\"gridData\":{\"x\":0,\"y\":0,\"w\":45,\"h\":12,\"i\":\"2\"},\"version\":\"6.8.13\",\"panelIndex\":\"2\",\"type\":\"visualization\",\"id\":\"ff39fe80-d137-11ec-a54e-5feef079c06e\",\"embeddableConfig\":{}},{\"gridData\":{\"x\":0,\"y\":37,\"w\":45,\"h\":12,\"i\":\"3\"},\"version\":\"6.8.13\",\"panelIndex\":\"3\",\"type\":\"visualization\",\"id\":\"394f5670-d137-11ec-a54e-5feef079c06e\",\"embeddableConfig\":{}},{\"gridData\":{\"x\":0,\"y\":25,\"w\":45,\"h\":12,\"i\":\"4\"},\"version\":\"6.8.13\",\"panelIndex\":\"4\",\"type\":\"visualization\",\"id\":\"9a572630-d134-11ec-a54e-5feef079c06e\",\"embeddableConfig\":{}}]",
+      "optionsJSON": "{\"darkTheme\":false,\"useMargins\":true,\"hidePanelTitles\":false}",
+      "version": 1,
+      "timeRestore": true,
+      "timeTo": "now",
+      "timeFrom": "now-7d",
+      "refreshInterval": {
+        "pause": true,
+        "value": 0
+      },
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"query\":{\"query\":\"NOT orig_hostname:(*changeme*)\",\"language\":\"lucene\"},\"filter\":[]}"
+      }
+    }
+  },
+  {
+    "_id": "99227390-d612-11ec-8e19-9b6f3d4bef8a",
+    "_type": "dashboard",
+    "_source": {
+      "title": "Threat Hunting Webinar - DCsync DCShadow",
+      "hits": 0,
+      "description": "Dashboard to assist with hosts potentially performing DCSync or DCShadow techniques",
+      "panelsJSON": "[{\"embeddableConfig\":{},\"gridData\":{\"h\":11,\"i\":\"3\",\"w\":48,\"x\":0,\"y\":0},\"id\":\"16d32df0-c909-11ec-a54e-5feef079c06e\",\"panelIndex\":\"3\",\"type\":\"visualization\",\"version\":\"6.8.13\"},{\"embeddableConfig\":{\"vis\":{\"legendOpen\":false}},\"gridData\":{\"h\":10,\"i\":\"4\",\"w\":48,\"x\":0,\"y\":26},\"id\":\"20457230-c90e-11ec-a54e-5feef079c06e\",\"panelIndex\":\"4\",\"type\":\"visualization\",\"version\":\"6.8.13\"},{\"embeddableConfig\":{},\"gridData\":{\"h\":15,\"i\":\"5\",\"w\":24,\"x\":0,\"y\":11},\"id\":\"9fdd92a0-d12b-11ec-a54e-5feef079c06e\",\"panelIndex\":\"5\",\"type\":\"visualization\",\"version\":\"6.8.13\"},{\"embeddableConfig\":{},\"gridData\":{\"h\":15,\"i\":\"6\",\"w\":24,\"x\":24,\"y\":11},\"id\":\"d693c490-d12b-11ec-a54e-5feef079c06e\",\"panelIndex\":\"6\",\"type\":\"visualization\",\"version\":\"6.8.13\"},{\"embeddableConfig\":{},\"gridData\":{\"h\":15,\"i\":\"7\",\"w\":24,\"x\":0,\"y\":36},\"id\":\"63cdfbe0-d12d-11ec-a54e-5feef079c06e\",\"panelIndex\":\"7\",\"type\":\"search\",\"version\":\"6.8.13\"},{\"embeddableConfig\":{},\"gridData\":{\"h\":15,\"i\":\"8\",\"w\":24,\"x\":24,\"y\":36},\"id\":\"b4588790-d530-11ec-8e19-9b6f3d4bef8a\",\"panelIndex\":\"8\",\"title\":\"DCSync - Requests and Responses\",\"type\":\"visualization\",\"version\":\"6.8.13\"}]",
+      "optionsJSON": "{\"darkTheme\":false,\"hidePanelTitles\":false,\"useMargins\":true}",
+      "version": 1,
+      "timeRestore": true,
+      "timeTo": "now",
+      "timeFrom": "now-7d",
+      "refreshInterval": {
+        "pause": true,
+        "value": 0
+      },
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"query\":{\"language\":\"lucene\",\"query\":\"NOT orig_hostname:(*changeme*)\"},\"filter\":[]}"
+      }
+    }
+  }
+   {
+    "_id": "72467480-d133-11ec-a54e-5feef079c06e",
+    "_type": "search",
+    "_source": {
+      "title": "PsExec - Write to ADMIN share",
+      "description": "",
+      "hits": 0,
+      "columns": [
+        "orig_hostname",
+        "resp_hostname",
+        "username",
+        "path",
+        "name"
+      ],
+      "sort": [
+        "ts",
+        "desc"
+      ],
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"ebdfbd70-6002-11e8-a7ed-536a89aa0526\",\"highlightAll\":true,\"version\":true,\"query\":{\"language\":\"lucene\",\"query\":\"path:/.*\\\\\\\\(ADMIN|admin|Admin)$/ AND name:/[\\\\\\\\\\\\.A-Za-z0-9]{1,}\\\\.(exe|EXE|bat|BAT|ps1|PS1)/\"},\"filter\":[]}"
+      }
+    }
+  },
+  {
+    "_id": "a5c54930-d133-11ec-a54e-5feef079c06e",
+    "_type": "search",
+    "_source": {
+      "title": "PsExec - Possible service creation or start",
+      "description": "",
+      "hits": 0,
+      "columns": [
+        "orig_hostname",
+        "resp_hostname",
+        "username",
+        "endpoint",
+        "operation"
+      ],
+      "sort": [
+        "ts",
+        "desc"
+      ],
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"584cb8f0-4e0b-11e8-93cf-57838bc3a575\",\"highlightAll\":true,\"version\":true,\"query\":{\"language\":\"lucene\",\"query\":\"operation:/(CreateService.|StartService.)/\"},\"filter\":[]}"
+      }
+    }
+  },
+  {
+    "_id": "22de47a0-d134-11ec-a54e-5feef079c06e",
+    "_type": "search",
+    "_source": {
+      "title": "PsExec - Possible interactive I/O",
+      "description": "",
+      "hits": 0,
+      "columns": [
+        "orig_hostname",
+        "resp_hostname",
+        "username",
+        "path",
+        "name",
+        "action"
+      ],
+      "sort": [
+        "ts",
+        "desc"
+      ],
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"ebdfbd70-6002-11e8-a7ed-536a89aa0526\",\"highlightAll\":true,\"version\":true,\"query\":{\"query\":\"path:/.*\\\\\\\\(IPC|ipc)$/ AND name:/.*(std|STD)(in|IN|err|ERR|out|OUT).*/\",\"language\":\"lucene\"},\"filter\":[]}"
+      }
+    }
+  },
+  {
+    "_id": "9a572630-d134-11ec-a54e-5feef079c06e",
+    "_type": "visualization",
+    "_source": {
+      "title": "PsExec - Possible Service Creation or Start",
+      "visState": "{\"title\":\"PsExec - Possible Service Creation or Start\",\"type\":\"table\",\"params\":{\"perPage\":10,\"showPartialRows\":false,\"showMetricsAtAllLevels\":false,\"sort\":{\"columnIndex\":null,\"direction\":null},\"showTotal\":false,\"totalFunc\":\"sum\"},\"aggs\":[{\"id\":\"1\",\"enabled\":true,\"type\":\"count\",\"schema\":\"metric\",\"params\":{}},{\"id\":\"2\",\"enabled\":true,\"type\":\"terms\",\"schema\":\"bucket\",\"params\":{\"field\":\"orig_hostname\",\"size\":5,\"order\":\"desc\",\"orderBy\":\"1\",\"otherBucket\":false,\"otherBucketLabel\":\"Other\",\"missingBucket\":false,\"missingBucketLabel\":\"Missing\",\"customLabel\":\"Source Host\"}},{\"id\":\"3\",\"enabled\":true,\"type\":\"terms\",\"schema\":\"bucket\",\"params\":{\"field\":\"resp_hostname\",\"size\":5,\"order\":\"desc\",\"orderBy\":\"1\",\"otherBucket\":false,\"otherBucketLabel\":\"Other\",\"missingBucket\":false,\"missingBucketLabel\":\"Missing\",\"customLabel\":\"Target Host\"}},{\"id\":\"4\",\"enabled\":true,\"type\":\"terms\",\"schema\":\"bucket\",\"params\":{\"field\":\"operation\",\"size\":5,\"order\":\"desc\",\"orderBy\":\"1\",\"otherBucket\":false,\"otherBucketLabel\":\"Other\",\"missingBucket\":false,\"missingBucketLabel\":\"Missing\",\"customLabel\":\"SVCCTL Operation\"}}]}",
+      "uiStateJSON": "{\"vis\":{\"params\":{\"sort\":{\"columnIndex\":null,\"direction\":null}}}}",
+      "description": "",
+      "savedSearchId": "a5c54930-d133-11ec-a54e-5feef079c06e",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"query\":{\"query\":\"\",\"language\":\"lucene\"},\"filter\":[]}"
+      }
+    },
+    "_migrationVersion": {
+      "visualization": "6.7.2"
+    }
+  },
+  {
+    "_id": "40a72350-d135-11ec-a54e-5feef079c06e",
+    "_type": "visualization",
+    "_source": {
+      "title": "PsExec - Write to ADMIN Share",
+      "visState": "{\"title\":\"PsExec - Write to ADMIN Share\",\"type\":\"table\",\"params\":{\"perPage\":10,\"showPartialRows\":false,\"showMetricsAtAllLevels\":false,\"sort\":{\"columnIndex\":null,\"direction\":null},\"showTotal\":false,\"totalFunc\":\"sum\"},\"aggs\":[{\"id\":\"1\",\"enabled\":true,\"type\":\"count\",\"schema\":\"metric\",\"params\":{}},{\"id\":\"2\",\"enabled\":true,\"type\":\"terms\",\"schema\":\"bucket\",\"params\":{\"field\":\"orig_hostname\",\"size\":5,\"order\":\"desc\",\"orderBy\":\"1\",\"otherBucket\":false,\"otherBucketLabel\":\"Other\",\"missingBucket\":false,\"missingBucketLabel\":\"Missing\",\"customLabel\":\"Source Host\"}},{\"id\":\"3\",\"enabled\":true,\"type\":\"terms\",\"schema\":\"bucket\",\"params\":{\"field\":\"resp_hostname\",\"size\":5,\"order\":\"desc\",\"orderBy\":\"1\",\"otherBucket\":false,\"otherBucketLabel\":\"Other\",\"missingBucket\":false,\"missingBucketLabel\":\"Missing\",\"customLabel\":\"Target Host\"}},{\"id\":\"4\",\"enabled\":true,\"type\":\"terms\",\"schema\":\"bucket\",\"params\":{\"field\":\"path\",\"size\":5,\"order\":\"desc\",\"orderBy\":\"1\",\"otherBucket\":false,\"otherBucketLabel\":\"Other\",\"missingBucket\":false,\"missingBucketLabel\":\"Missing\",\"customLabel\":\"Share Path\"}},{\"id\":\"5\",\"enabled\":true,\"type\":\"terms\",\"schema\":\"bucket\",\"params\":{\"field\":\"name\",\"size\":5,\"order\":\"desc\",\"orderBy\":\"1\",\"otherBucket\":false,\"otherBucketLabel\":\"Other\",\"missingBucket\":false,\"missingBucketLabel\":\"Missing\",\"customLabel\":\"File Name\"}}]}",
+      "uiStateJSON": "{\"vis\":{\"params\":{\"sort\":{\"columnIndex\":null,\"direction\":null}}}}",
+      "description": "",
+      "savedSearchId": "72467480-d133-11ec-a54e-5feef079c06e",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"query\":{\"query\":\"\",\"language\":\"lucene\"},\"filter\":[]}"
+      }
+    },
+    "_migrationVersion": {
+      "visualization": "6.7.2"
+    }
+  },
+  {
+    "_id": "394f5670-d137-11ec-a54e-5feef079c06e",
+    "_type": "visualization",
+    "_source": {
+      "title": "PsExec - Interactive I/O",
+      "visState": "{\"title\":\"PsExec - Interactive I/O\",\"type\":\"table\",\"params\":{\"perPage\":10,\"showPartialRows\":false,\"showMetricsAtAllLevels\":false,\"sort\":{\"columnIndex\":null,\"direction\":null},\"showTotal\":false,\"totalFunc\":\"sum\"},\"aggs\":[{\"id\":\"1\",\"enabled\":true,\"type\":\"count\",\"schema\":\"metric\",\"params\":{}},{\"id\":\"2\",\"enabled\":true,\"type\":\"terms\",\"schema\":\"bucket\",\"params\":{\"field\":\"orig_hostname\",\"size\":5,\"order\":\"desc\",\"orderBy\":\"1\",\"otherBucket\":false,\"otherBucketLabel\":\"Other\",\"missingBucket\":false,\"missingBucketLabel\":\"Missing\",\"customLabel\":\"Source Host\"}},{\"id\":\"3\",\"enabled\":true,\"type\":\"terms\",\"schema\":\"bucket\",\"params\":{\"field\":\"resp_hostname\",\"size\":5,\"order\":\"desc\",\"orderBy\":\"1\",\"otherBucket\":false,\"otherBucketLabel\":\"Other\",\"missingBucket\":false,\"missingBucketLabel\":\"Missing\",\"customLabel\":\"Target Host\"}},{\"id\":\"4\",\"enabled\":true,\"type\":\"terms\",\"schema\":\"bucket\",\"params\":{\"field\":\"path\",\"size\":5,\"order\":\"desc\",\"orderBy\":\"1\",\"otherBucket\":false,\"otherBucketLabel\":\"Other\",\"missingBucket\":false,\"missingBucketLabel\":\"Missing\",\"customLabel\":\"Share\"}},{\"id\":\"5\",\"enabled\":true,\"type\":\"terms\",\"schema\":\"bucket\",\"params\":{\"field\":\"name\",\"size\":5,\"order\":\"desc\",\"orderBy\":\"1\",\"otherBucket\":false,\"otherBucketLabel\":\"Other\",\"missingBucket\":false,\"missingBucketLabel\":\"Missing\",\"customLabel\":\"I/O Pipe Name\"}}]}",
+      "uiStateJSON": "{\"vis\":{\"params\":{\"sort\":{\"columnIndex\":null,\"direction\":null}}}}",
+      "description": "",
+      "savedSearchId": "22de47a0-d134-11ec-a54e-5feef079c06e",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"query\":{\"query\":\"\",\"language\":\"lucene\"},\"filter\":[]}"
+      }
+    },
+    "_migrationVersion": {
+      "visualization": "6.7.2"
+    }
+  },
+  {
+    "_id": "ff39fe80-d137-11ec-a54e-5feef079c06e",
+    "_type": "visualization",
+    "_source": {
+      "title": "PsExec Monitoring",
+      "visState": "{\"title\":\"PsExec Monitoring\",\"type\":\"markdown\",\"params\":{\"fontSize\":12,\"openLinksInNewTab\":false,\"markdown\":\"![imageName](data:image/png;base64,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) \\n# PsExec Monitoring  \\nThis dashboard helps uncover traits that may indicate the usage of [SysInternals PsExec](https://docs.microsoft.com/en-us/sysinternals/downloads/psexec) or the technique SMB [PsExec](https://attack.mitre.org/software/S0029/) used by red teams and threat actors.  \\nClicking the ![imageName](data:image/png;base64,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) in the chart to filter out records that are related to known authorized activity.  Recommend modifying the search to exclude hosts that are known authorized sources by name and saving.  \\nLearn more about threat hunting for DCSync, DCShadow, and PSExec from [this webinar](https://event.on24.com/wcc/r/3758948/F4E8BA721E4BB7E14B2326E762AA9031?partnerref=dashboard)\"},\"aggs\":[]}",
+      "uiStateJSON": "{}",
+      "description": "",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"query\":{\"query\":\"\",\"language\":\"lucene\"},\"filter\":[]}"
+      }
+    },
+    "_migrationVersion": {
+      "visualization": "6.7.2"
+    }
+  }
+  {
+    "_id": "63cdfbe0-d12d-11ec-a54e-5feef079c06e",
+    "_type": "search",
+    "_source": {
+      "title": "DCSync - Hosts RPC RTT",
+      "description": "",
+      "hits": 0,
+      "columns": [
+        "orig_hostname",
+        "resp_hostname",
+        "operation",
+        "rtt"
+      ],
+      "sort": [
+        "ts",
+        "desc"
+      ],
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"584cb8f0-4e0b-11e8-93cf-57838bc3a575\",\"highlightAll\":true,\"version\":true,\"query\":{\"query\":\"operation:DRSGetNCChanges\",\"language\":\"lucene\"},\"filter\":[]}"
+      }
+    }
+  },
+  {
+    "_id": "20457230-c90e-11ec-a54e-5feef079c06e",
+    "_type": "visualization",
+    "_source": {
+      "title": "DCERPC Max Data Received",
+      "visState": "{\"title\":\"DCERPC Max Data Received\",\"type\":\"line\",\"params\":{\"type\":\"line\",\"grid\":{\"categoryLines\":false,\"style\":{\"color\":\"#eee\"}},\"categoryAxes\":[{\"id\":\"CategoryAxis-1\",\"type\":\"category\",\"position\":\"bottom\",\"show\":true,\"style\":{},\"scale\":{\"type\":\"linear\"},\"labels\":{\"show\":true,\"truncate\":100},\"title\":{}}],\"valueAxes\":[{\"id\":\"ValueAxis-1\",\"name\":\"LeftAxis-1\",\"type\":\"value\",\"position\":\"left\",\"show\":true,\"style\":{},\"scale\":{\"type\":\"linear\",\"mode\":\"normal\"},\"labels\":{\"show\":true,\"rotate\":0,\"filter\":false,\"truncate\":100},\"title\":{\"text\":\"Max resp_ip_bytes\"}}],\"seriesParams\":[{\"show\":\"true\",\"type\":\"line\",\"mode\":\"normal\",\"data\":{\"label\":\"Max resp_ip_bytes\",\"id\":\"1\"},\"valueAxis\":\"ValueAxis-1\",\"drawLinesBetweenPoints\":true,\"showCircles\":true}],\"addTooltip\":true,\"addLegend\":true,\"legendPosition\":\"right\",\"times\":[],\"addTimeMarker\":false},\"aggs\":[{\"id\":\"1\",\"enabled\":true,\"type\":\"max\",\"schema\":\"metric\",\"params\":{\"field\":\"resp_ip_bytes\"}},{\"id\":\"2\",\"enabled\":true,\"type\":\"date_histogram\",\"schema\":\"segment\",\"params\":{\"field\":\"ts\",\"timeRange\":{\"from\":\"now-14d\",\"to\":\"now\",\"mode\":\"relative\"},\"useNormalizedEsInterval\":true,\"interval\":\"h\",\"drop_partials\":false,\"customInterval\":\"2h\",\"min_doc_count\":1,\"extended_bounds\":{}}}]}",
+      "uiStateJSON": "{}",
+      "description": "",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"a7480050-3118-11e8-b629-33a5d6f661b4\",\"query\":{\"query\":\"service:dcerpc\",\"language\":\"lucene\"},\"filter\":[]}"
+      }
+    },
+    "_migrationVersion": {
+      "visualization": "6.7.2"
+    }
+  },
+  {
+    "_id": "d693c490-d12b-11ec-a54e-5feef079c06e",
+    "_type": "visualization",
+    "_source": {
+      "title": "DCShadow - Hosts adding/deleting KCC replicas (should only be DCs)",
+      "visState": "{\"title\":\"DCShadow - Hosts adding/deleting KCC replicas (should only be DCs)\",\"type\":\"horizontal_bar\",\"params\":{\"type\":\"histogram\",\"grid\":{\"categoryLines\":false,\"style\":{\"color\":\"#eee\"}},\"categoryAxes\":[{\"id\":\"CategoryAxis-1\",\"type\":\"category\",\"position\":\"left\",\"show\":true,\"style\":{},\"scale\":{\"type\":\"linear\"},\"labels\":{\"show\":true,\"rotate\":0,\"filter\":false,\"truncate\":200},\"title\":{}}],\"valueAxes\":[{\"id\":\"ValueAxis-1\",\"name\":\"LeftAxis-1\",\"type\":\"value\",\"position\":\"bottom\",\"show\":true,\"style\":{},\"scale\":{\"type\":\"linear\",\"mode\":\"normal\"},\"labels\":{\"show\":true,\"rotate\":75,\"filter\":true,\"truncate\":100},\"title\":{\"text\":\"Count\"}}],\"seriesParams\":[{\"show\":true,\"type\":\"histogram\",\"mode\":\"normal\",\"data\":{\"label\":\"Count\",\"id\":\"1\"},\"valueAxis\":\"ValueAxis-1\",\"drawLinesBetweenPoints\":true,\"showCircles\":true}],\"addTooltip\":true,\"addLegend\":true,\"legendPosition\":\"right\",\"times\":[],\"addTimeMarker\":false},\"aggs\":[{\"id\":\"1\",\"enabled\":true,\"type\":\"count\",\"schema\":\"metric\",\"params\":{}},{\"id\":\"2\",\"enabled\":true,\"type\":\"terms\",\"schema\":\"segment\",\"params\":{\"field\":\"orig_hostname\",\"size\":5,\"order\":\"desc\",\"orderBy\":\"1\",\"otherBucket\":true,\"otherBucketLabel\":\"Other\",\"missingBucket\":false,\"missingBucketLabel\":\"Missing\"}}]}",
+      "uiStateJSON": "{}",
+      "description": "",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"584cb8f0-4e0b-11e8-93cf-57838bc3a575\",\"query\":{\"query\":\"operation:(DRSAddEntry OR DRSReplicaAdd OR DRSReplicaDel)\",\"language\":\"lucene\"},\"filter\":[]}"
+      }
+    },
+    "_migrationVersion": {
+      "visualization": "6.7.2"
+    }
+  },
+  {
+    "_id": "9fdd92a0-d12b-11ec-a54e-5feef079c06e",
+    "_type": "visualization",
+    "_source": {
+      "title": "DCSync - Hosts replicating copy of AD (should only be DCs)",
+      "visState": "{\"title\":\"DCSync - Hosts replicating copy of AD (should only be DCs)\",\"type\":\"horizontal_bar\",\"params\":{\"addLegend\":true,\"addTimeMarker\":false,\"addTooltip\":true,\"categoryAxes\":[{\"id\":\"CategoryAxis-1\",\"labels\":{\"filter\":false,\"rotate\":0,\"show\":true,\"truncate\":200},\"position\":\"left\",\"scale\":{\"type\":\"linear\"},\"show\":true,\"style\":{},\"title\":{},\"type\":\"category\"}],\"grid\":{\"categoryLines\":false,\"style\":{\"color\":\"#eee\"}},\"legendPosition\":\"right\",\"seriesParams\":[{\"data\":{\"id\":\"1\",\"label\":\"Count\"},\"drawLinesBetweenPoints\":true,\"mode\":\"normal\",\"show\":true,\"showCircles\":true,\"type\":\"histogram\",\"valueAxis\":\"ValueAxis-1\"}],\"times\":[],\"type\":\"histogram\",\"valueAxes\":[{\"id\":\"ValueAxis-1\",\"labels\":{\"filter\":true,\"rotate\":75,\"show\":true,\"truncate\":100},\"name\":\"LeftAxis-1\",\"position\":\"bottom\",\"scale\":{\"mode\":\"normal\",\"type\":\"linear\"},\"show\":true,\"style\":{},\"title\":{\"text\":\"Count\"},\"type\":\"value\"}]},\"aggs\":[{\"id\":\"1\",\"enabled\":true,\"type\":\"count\",\"schema\":\"metric\",\"params\":{}},{\"id\":\"2\",\"enabled\":true,\"type\":\"terms\",\"schema\":\"segment\",\"params\":{\"field\":\"orig_hostname\",\"size\":5,\"order\":\"desc\",\"orderBy\":\"1\",\"otherBucket\":true,\"otherBucketLabel\":\"Other\",\"missingBucket\":false,\"missingBucketLabel\":\"Missing\"}}]}",
+      "uiStateJSON": "{}",
+      "description": "",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"584cb8f0-4e0b-11e8-93cf-57838bc3a575\",\"query\":{\"language\":\"lucene\",\"query\":\"operation:DRSGetNCChanges\"},\"filter\":[]}"
+      }
+    },
+    "_migrationVersion": {
+      "visualization": "6.7.2"
+    }
+  },
+  {
+    "_id": "b4588790-d530-11ec-8e19-9b6f3d4bef8a",
+    "_type": "visualization",
+    "_source": {
+      "title": "VSK - DCSync - Requests and Responses",
+      "visState": "{\"title\":\"VSK - DCSync - Requests and Responses\",\"type\":\"heatmap\",\"params\":{\"type\":\"heatmap\",\"addTooltip\":true,\"addLegend\":true,\"enableHover\":false,\"legendPosition\":\"right\",\"times\":[],\"colorsNumber\":4,\"colorSchema\":\"Greens\",\"setColorRange\":false,\"colorsRange\":[],\"invertColors\":false,\"percentageMode\":false,\"valueAxes\":[{\"show\":false,\"id\":\"ValueAxis-1\",\"type\":\"value\",\"scale\":{\"type\":\"linear\",\"defaultYExtents\":false},\"labels\":{\"show\":false,\"rotate\":0,\"overwriteColor\":false,\"color\":\"#555\"}}]},\"aggs\":[{\"id\":\"1\",\"enabled\":true,\"type\":\"count\",\"schema\":\"metric\",\"params\":{}},{\"id\":\"2\",\"enabled\":true,\"type\":\"terms\",\"schema\":\"segment\",\"params\":{\"field\":\"resp_hostname\",\"size\":5,\"order\":\"desc\",\"orderBy\":\"1\",\"otherBucket\":false,\"otherBucketLabel\":\"Other\",\"missingBucket\":false,\"missingBucketLabel\":\"Missing\",\"customLabel\":\"Sync Responder\"}},{\"id\":\"3\",\"enabled\":true,\"type\":\"terms\",\"schema\":\"group\",\"params\":{\"field\":\"orig_hostname\",\"size\":5,\"order\":\"desc\",\"orderBy\":\"1\",\"otherBucket\":false,\"otherBucketLabel\":\"Other\",\"missingBucket\":false,\"missingBucketLabel\":\"Missing\",\"customLabel\":\"Sync Requestor\"}}]}",
+      "uiStateJSON": "{\"vis\":{\"defaultColors\":{\"0 - 500\":\"rgb(247,252,245)\",\"500 - 1000\":\"rgb(199,233,192)\",\"1000 - 1500\":\"rgb(116,196,118)\",\"1500 - 2000\":\"rgb(35,139,69)\"}}}",
+      "description": "",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"584cb8f0-4e0b-11e8-93cf-57838bc3a575\",\"query\":{\"query\":\"\",\"language\":\"lucene\"},\"filter\":[{\"meta\":{\"index\":\"584cb8f0-4e0b-11e8-93cf-57838bc3a575\",\"type\":\"phrases\",\"key\":\"operation\",\"value\":\"DRSGetNCChanges, DRSReplicaSync\",\"params\":[\"DRSGetNCChanges\",\"DRSReplicaSync\"],\"negate\":false,\"disabled\":false,\"alias\":null},\"query\":{\"bool\":{\"should\":[{\"match_phrase\":{\"operation\":\"DRSGetNCChanges\"}},{\"match_phrase\":{\"operation\":\"DRSReplicaSync\"}}],\"minimum_should_match\":1}},\"$state\":{\"store\":\"appState\"}}]}"
+      }
+    },
+    "_migrationVersion": {
+      "visualization": "6.7.2"
+    }
+  },
+  {
+    "_id": "16d32df0-c909-11ec-a54e-5feef079c06e",
+    "_type": "visualization",
+    "_source": {
+      "title": "DCSync & DCShadow Monitoring",
+      "visState": "{\"title\":\"DCSync & DCShadow Monitoring\",\"type\":\"markdown\",\"params\":{\"fontSize\":12,\"openLinksInNewTab\":false,\"markdown\":\"![imageName](data:image/png;base64,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) \\n# DCSync & DCShadow Monitoring  \\nThis dashboard helps uncover threats to Active Directory and network authentication. The source hosts in the bar charts should only be Domain Controllers. Clicking on a bar in the chart will filter for a specific source host, and the filter can be negated to exclude hosts. Vectra recommends modifying the search to exclude domain controllers by name and saving this dashboard.  \\nLearn more about threat hunting for DCSync, DCShadow, and PSExec from [this webinar](https://event.on24.com/wcc/r/3758948/F4E8BA721E4BB7E14B2326E762AA9031?partnerref=dashboard)\"},\"aggs\":[]}",
+      "uiStateJSON": "{}",
+      "description": "",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"query\":{\"query\":\"\",\"language\":\"lucene\"},\"filter\":[]}"
+      }
+    },
+    "_migrationVersion": {
+      "visualization": "6.7.2"
+    }
+  }
+]
