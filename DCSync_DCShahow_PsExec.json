@@ -42,7 +42,7 @@
         "searchSourceJSON": "{\"query\":{\"language\":\"lucene\",\"query\":\"NOT orig_hostname:(*changeme*)\"},\"filter\":[]}"
       }
     }
-  }
+  },
    {
     "_id": "72467480-d133-11ec-a54e-5feef079c06e",
     "_type": "search",
@@ -186,7 +186,7 @@
     "_migrationVersion": {
       "visualization": "6.7.2"
     }
-  }
+  },
   {
     "_id": "63cdfbe0-d12d-11ec-a54e-5feef079c06e",
     "_type": "search",
